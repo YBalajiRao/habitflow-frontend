@@ -13,7 +13,7 @@ const api = axios.create({
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('access_token');
   if (token) {
-    config.headers.Authorization = 'Bearer ' + token;
+    config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
 });
@@ -29,11 +29,11 @@ export const authAPI = {
 export const habitsAPI = {
   getAll: () => api.get('/habits/'),
   create: (habitData) => api.post('/habits/', habitData),
-  get: (id) => api.get(/habits/\/),
-  update: (id, data) => api.put(/habits/\/, data),
-  delete: (id) => api.delete(/habits/\/),
+  get: (id) => api.get(`/habits/${id}/`),
+  update: (id, data) => api.put(`/habits/${id}/`, data),
+  delete: (id) => api.delete(`/habits/${id}/`),
   updateProgress: (id, date, progress) => 
-    api.post(/habits/\/update_progress/, { date, progress }),
+    api.post(`/habits/${id}/update_progress/`, { date, progress }),
 }
 
 export default api
